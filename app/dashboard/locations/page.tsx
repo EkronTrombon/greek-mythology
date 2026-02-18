@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { deleteLocation } from "@/lib/actions/locations";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 
-export default function DashboardLocationsPage() {
-  const allLocations = mockDb.getAllLocations();
+export default async function DashboardLocationsPage() {
+  const allLocations = await database.getAllLocations();
 
   return (
     <div className="max-w-5xl">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 const categoryConfig = [
   {
@@ -39,8 +39,8 @@ const categoryConfig = [
   },
 ] as const;
 
-export default function DashboardPage() {
-  const stats = mockDb.getStats();
+export default async function DashboardPage() {
+  const stats = await database.getStats();
 
   return (
     <div className="max-w-5xl">

@@ -1,10 +1,10 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function GodDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const god = mockDb.getGodById(id);
+  const god = await database.getGodById(id);
   if (!god) notFound();
 
   return (

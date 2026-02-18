@@ -1,4 +1,4 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import GodForm from "@/components/dashboard/forms/GodForm";
 import DeleteButton from "@/components/dashboard/DeleteButton";
@@ -11,7 +11,7 @@ export default async function EditGodPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const god = mockDb.getGodById(id);
+  const god = await database.getGodById(id);
   if (!god) notFound();
 
   return (

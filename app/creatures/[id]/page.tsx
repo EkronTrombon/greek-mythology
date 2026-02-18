@@ -1,10 +1,10 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function CreatureDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const creature = mockDb.getCreatureById(id);
+  const creature = await database.getCreatureById(id);
   if (!creature) notFound();
 
   return (

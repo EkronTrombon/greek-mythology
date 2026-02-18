@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { deleteGod } from "@/lib/actions/gods";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 
-export default function DashboardGodsPage() {
+export default async function DashboardGodsPage() {
   // Use sync mock data for display (real DB data would come from lib/db-api.ts)
-  const allGods = mockDb.getAllGods();
+  const allGods = await database.getAllGods();
 
   return (
     <div className="max-w-5xl">

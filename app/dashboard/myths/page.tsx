@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { deleteMyth } from "@/lib/actions/myths";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 
-export default function DashboardMythsPage() {
-  const allMyths = mockDb.getAllMyths();
+export default async function DashboardMythsPage() {
+  const allMyths = await database.getAllMyths();
 
   return (
     <div className="max-w-5xl">

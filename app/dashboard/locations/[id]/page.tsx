@@ -1,4 +1,4 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import LocationForm from "@/components/dashboard/forms/LocationForm";
 import DeleteButton from "@/components/dashboard/DeleteButton";
@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function EditLocationPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const location = mockDb.getLocationById(id);
+  const location = await database.getLocationById(id);
   if (!location) notFound();
 
   return (

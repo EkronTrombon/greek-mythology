@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { deleteCreature } from "@/lib/actions/creatures";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 
-export default function DashboardCreaturesPage() {
-  const allCreatures = mockDb.getAllCreatures();
+export default async function DashboardCreaturesPage() {
+  const allCreatures = await database.getAllCreatures();
 
   return (
     <div className="max-w-5xl">

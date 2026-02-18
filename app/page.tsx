@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 const categories = [
   {
@@ -44,9 +44,12 @@ const categories = [
   },
 ];
 
-export default function HomePage() {
-  const stats = mockDb.getStats();
-  const featuredMyth = mockDb.getMythsByCategory("heroic")[0];
+export default async function HomePage() {
+  const [stats, heroicMyths] = await Promise.all([
+    database.getStats(),
+    database.getMythsByCategory("heroic"),
+  ]);
+  const featuredMyth = heroicMyths[0];
 
   const categoryCounts: Record<string, number> = {
     Gods: stats.totalGods,
@@ -194,7 +197,7 @@ export default function HomePage() {
                 <span className="font-heading text-xs tracking-[0.15em] uppercase px-3 py-1 border border-border-gold text-gold-muted">
                   {featuredMyth.category}
                 </span>
-                {featuredMyth.characters.slice(0, 3).map((c) => (
+                {featuredMyth.characters.slice(0, 3).map((c: string) => (
                   <span
                     key={c}
                     className="font-body text-xs px-3 py-1 bg-bg-secondary text-text-faint"

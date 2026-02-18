@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 export const metadata = {
   title: "Heroes — MYTHICA",
   description: "The legendary heroes of ancient Greece — mortals and demigods who defied fate.",
 };
 
-export default function HeroesPage() {
-  const heroes = mockDb.getAllHeroes();
+export default async function HeroesPage() {
+  const heroes = await database.getAllHeroes();
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12">

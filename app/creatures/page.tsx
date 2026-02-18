@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 export const metadata = {
   title: "Creatures — MYTHICA",
   description: "Monsters, beasts, and mythological beings of ancient Greece.",
 };
 
-export default function CreaturesPage() {
-  const creatures = mockDb.getAllCreatures();
+export default async function CreaturesPage() {
+  const creatures = await database.getAllCreatures();
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12">

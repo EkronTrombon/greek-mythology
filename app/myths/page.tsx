@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 export const metadata = {
   title: "Myths — MYTHICA",
@@ -15,8 +15,8 @@ const categoryColors: Record<string, string> = {
   love: "text-pink-400",
 };
 
-export default function MythsPage() {
-  const myths = mockDb.getAllMyths();
+export default async function MythsPage() {
+  const myths = await database.getAllMyths();
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12">

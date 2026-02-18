@@ -1,10 +1,10 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function MythDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const myth = mockDb.getMythById(id);
+  const myth = await database.getMythById(id);
   if (!myth) notFound();
 
   return (

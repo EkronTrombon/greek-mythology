@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 
 export const metadata = {
   title: "Locations — MYTHICA",
   description: "Sacred mountains, mythical realms, and ancient cities of Greek mythology.",
 };
 
-export default function LocationsPage() {
-  const locations = mockDb.getAllLocations();
+export default async function LocationsPage() {
+  const locations = await database.getAllLocations();
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 py-12">

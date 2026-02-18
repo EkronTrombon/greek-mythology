@@ -1,4 +1,4 @@
-import { database as mockDb } from "@/lib/database";
+import { database } from "@/lib/db-api";
 import { notFound } from "next/navigation";
 import MythForm from "@/components/dashboard/forms/MythForm";
 import DeleteButton from "@/components/dashboard/DeleteButton";
@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default async function EditMythPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const myth = mockDb.getMythById(id);
+  const myth = await database.getMythById(id);
   if (!myth) notFound();
 
   return (
